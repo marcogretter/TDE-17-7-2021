@@ -1,0 +1,18 @@
+ Scrivere in SQL la query che estrae Cognome e Nome dei Pazienti che nel 2021 hanno sempre avuto Valorisuperiori a 200 per l’Esame “Colesterolo”.
+
+ SELECT P.Nome,P.Cognome
+ FROM Paziente P,Campione C,Analisi A
+ WHERE P.CodiceFiscale=C.CfPaziente AND
+       C.Id=A.Id AND
+       C.Data>='1/1/2021' AND C.Data<='31/1/2021' AND
+       A.Esame='Colesterolo'
+GROUP BY P.CodiceFiscale
+ HAVING A.Valore>=200
+ 
+ 
+ Estrarre tutti i gruppi sanguigni e la media dei valori di “colesterolo” tra i pazienti aventi lo stesso gruppo sanguigno.
+SELECT P.GruppoSanguigno, AVG(A.Valore)
+FROM Paziente P,Analisi A,Campione C
+WHERE P.CodiceFiscale=C.CFPaziente AND
+      C.ID=A.Id 
+ GROUP BY P.GruppoSanguigno
