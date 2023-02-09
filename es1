@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ #define N 10
+
+int analizzaMatrice(int M[][N],int k,int riga,int colonna);
+
+ int main(){
+     int M[N][N] = {
+         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+         {0, 1, 1, 1, 0, 7, 7, 7, 7, 0},
+         {0, 1, 1, 9, 0, 7, 7, 7, 7, 0},
+         {0, 1, 9, 1, 0, 7, 7, 7, 7, 0},
+         {0, 0, 2, 2, 2, 7, 7, 7, 7, 0},
+         {0, 0, 2, 2, 2, 0, 0, 0, 0, 0},
+         {0, 0, 2, 2, 2, 0, 0, 0, 4, 0},
+         {0, 0, 6, 2, 2, 0, 1, 0, 0, 0},
+         {0, 0, 5, 7, 8, 0, 0, 2, 0, 0},
+         {0, 0, 2, 5, 2, 0, 0, 0, 3, 0},
+     };
+     int r,c,k,vero;
+     do{
+         printf("Inserisci valore della riga:\n");
+         scanf("%d",&r);
+         printf("Inserisci valore colonna:\n");
+         scanf("%d",&c);
+         printf("Quanto dev'essere lungo il lato della matrice quadrata?\n");
+         scanf("%d",&k);}while(r<0||c<0||r>N-1||c>N-1);
+    //TODO: invocare la funzione
+     vero=analizzaMatrice(M, k, r, c);
+    //TODO: stampare i messaggi come da esempi
+     printf("analizzaMatrice invocata su M con K=%d, R=%d, C=%d ritorna %d\n",k,r,c,vero);
+
+ }
+ int analizzaMatrice(int M[][N],int k,int riga,int colonna)
+{
+     int i,j;
+     int val,cont=0;
+     val=M[riga][colonna];
+     for (i=riga; i<k+riga; i++) {
+         for (j=colonna; j<k+colonna; j++) {
+             if(val==M[i][j])
+                 cont++;
+         }
+     }
+     if(cont==(k*k))
+         return 1;
+     return 0;
+}
